@@ -1,0 +1,358 @@
+[smartform]
+required = "Voc&ecirc; n&atilde;o preencheu os seguintes campos:"
+
+hora_invalida = "A hora deve ser um n&uacute;mero entre 0 e 23."
+minutos_invalida = "Os minutos devem ser um n&uacute;mero entre 0 e 59."
+segundos_invalida = "Os segundos devem ser um n&uacute;mero entre 0 e 59."
+
+
+[upload]
+arvore = "Pastas"
+arquivos = "Arquivos"
+
+[localization]
+january = "Janeiro"
+february = "Fevereiro"
+march = "Março"
+april = "Abril"
+may = "Maio"
+june = "Junho"
+july = "Julho"
+august = "Agosto"
+september = "Setembro"
+october = "Outubro"
+november = "Novembro"
+december = "Decembro"
+
+sun = "Dom"
+mon = "Seg"
+tue = "Ter"
+wed = "Qua"
+thu = "Qui"
+fri = "Sex"
+sat = "Sab"
+
+formato_data = "d/m/Y"
+
+[geral]
+nome_ambiente = "AMADIS Massinha"
+sim = "Sim"
+nao = "N&atilde;o"
+sair = "Sair"
+entrar = "Entrar"
+ok = "OK"
+cancelar = "Cancelar"
+enviar = "Enviar"
+voltar = "Voltar"
+criar = "Criar"
+limpar = "Limpar"
+aprovar = "Aprovar"
+rejeitar = "Rejeitar"
+login = "Login"
+logout = "Logout"
+download = "Download"
+ver = "Ver"
+buscar = "Buscar"
+conheca = "Conhe&ccedil;a"
+
+bem_vindo = "seja bem-vindo!"
+
+
+nenhum_email = "Nenhuma mensagem para voc&ecirc; no correio"
+mensagens_emails0a = "Chegou 1 mensagem nova para voc&ecirc; no correio."
+mensagens_emails0b = "Chegaram "
+mensagens_emails1b = " mensagens novas para voc&eacute; no correio."
+
+nobody_online = "Nenhuma outra pessoa online."
+
+minha_pagina = "Minha p&aacute;gina"
+ver_minha_pagina = "Ver a minha p&aacute;gina"
+publicar_minha_pagina = "Publicar a minha p&aacute;gina"
+
+projetos = "Projetos que Participo"
+web_papo = "Web Papo"
+meu_correio = "Meu Correio"
+nenhum_usuario_letra = "Nenhum usu&aacute;rio come&ccedil;ado com" 
+nenhum_item = "Nenhum item a ser visualisado"
+
+contatos = "Meus amigos"
+
+pagina = "P&aacute;gina"
+de = "de"
+ir_pagina = "Ir para a p&aacute;gina"
+
+orientador="Orientador"
+
+[manutencao]
+manutencao = "Esse ambiente est&aacute; temporariamente em manuten&ccedil;&atilde;o. Por favor, tente mais tarde.";
+tentar_novamente = "Tentar novamente"
+
+motivo = "Motivo"
+
+motivo_db_foradoar = "O banco de dados est&aacute; fora do ar."
+motivo_admin = "O administrador do ambiente ativou a manutencao."
+
+[diario]
+hoje = "Hoje &eacute; dia "
+comentarios = "Coment&aacute;rios"
+
+diario_de = "Di&aacute;rio de "
+
+comentario_enviado = "Seu coment&aacute;rio foi enviado com sucesso."
+ 
+tem_certeza_deletar = "Você tem certeza que deseja deletar essa entrada do diário?"
+nao_pode_deletar = "Voc&ecirc; n&atilde;o pode apagar essa entrada do di&aacute;rio"
+entrada_deletada = "Entrada no di&aacute;rio deletada";
+entrada_nao_exite = "Esta entrada do di&aacute;rio j&aacute; foi deletada"
+listar_diarios = "Ver os diários dos outros usuários"
+ve_meu_diario = "Volta para o Meu Diário"
+nenhum_diário = "Nenhum diário encontrado"
+
+nenhum_usuario = "N&atilde;o encontrei nenhuma pessoa que tenha o nome parecido com"
+
+link_info = "Informa&ccedil;&otilde;es"
+link_diario = "Di&aacute;rio"
+no_posts = "Diário vazio"
+search_diario = "Procura pelo usuário"
+
+[forum]
+forum = "F&oacute;rum"
+mensagens = "Mensagens"
+mensagem = "Mensagem"
+num_mensagem = "Mensagem (ns)"
+coordenador = "Coordenador"
+
+criar_forum_geral = "Criar f&oacute;rum geral"
+criar_forum_projeto = "Criar f&oacute;rum para este projeto"
+
+foruns_projeto = "F&oacute;runs do projeto"
+
+ver_toda_mensagem = "Ver as mensagens completas"
+ver_titulos_mensagens = "Ver somente os t&iacute;tulos"
+voltar_lista_mensagens = "Voltar"
+responder_mensagem = "Responder esta mensagem"
+outro_forum = "Selecionar outro f&oacute;rum"
+
+ver_preview = "Ver o preview da mensagem"
+limpar = "Limpar"
+voltar_lista_foruns = "Voltar a lista de f&oacute;runs"
+compor = "Compor mensagem"
+
+titulo = "T&iacute;tulo"
+autor = "Autor"
+numero_mensagens = "N&uacute;mero de mensagens do f&oacute;rum"
+data_mensagem = "Mensagem enviada em"
+data_abertura = "Data de abertura do f&oacute;rum"
+relacao_mensagem_original = "Rela&ccedil;&atilde;o com a mensagem original"
+
+ver_respostas = "Ver respostas"
+enviar_mensagem = "Enviar mensagem"
+
+resposta = "Resposta"
+anexar_imagem = "Anexar imagem"
+anexar = "Anexar"
+lista_imagens_anexadas = "Lista das imagens anexadas"
+excluir_imagens = "Excluir as imagens selecionadas"
+mensagem_enviada = "Sua mensagem foi enviada com sucesso!"
+concordo = "Concordo"
+discordo = "Discordo"
+duvida = "D&uacute;vida"
+ideia = "Id&eacute;ia"
+nenhuma = "Nenhuma"
+
+frm_nomForum = "Nome do f&oacute;rum:"
+frm_flaAllowPost = "Permitir que todas as pessoas possam escrever neste f&oacute;rum"
+frm_flaAllowView = "Permitir que todas as pessoas possam ler este f&oacute;rum"
+
+[inicial]
+no_project = "Voc&ecirc; n&atilde;o participa de nenhum projeto no momento"
+desc_amadis = " Amadis &eacute; um ambiente para auxiliar voc&ecirc; nos seus projetos e na busca de informa&ccedil;&otilde;es. Voc&ecirc; pode criar p&aacute;ginas e trocar emails com crianças de outras escolas."
+
+
+[login]
+esqueci = "Esqueci minha senha"
+cadastrar = "Quero me Cadastrar"
+info = "Mais informaç&otilde;es"
+erro = "Desculpe! Usu&aacute;rio não cadastrado"
+
+
+[projetos]
+criar_proj = "Criar projeto"
+a_pagina = "A p&aacute;gina desse projeto"
+os_foruns = "Os f&oacute;runs desse projeto"
+status = "Estado do projeto"
+area = "&Aacute;reas:"
+erro_area = "Nenhuma &aacute;rea cadastrada"
+erro_equipe = "Nenhuma equipe encontrada"
+erro_nov = "Nenhuma novidade cadastrada"
+erro_com = "Nenhum coment&aacute;rio cadastrado"
+erro_proj = "Nunhum projeto cadastrado"
+erro_no_area = "Nenhuma &aacute;rea cadastrada."
+ver_nov = "Ver mais novidades"
+ver_com = "Ver mais cometarios"
+ver_proj = "Ver todos os projetos"
+projetos_escola = "Ver os projetos por escola"
+escola_escola = "Selecione a escola"
+projetos_da_escola = "Listando os projetos da escola"
+repetido = "Este t&iacute;tulo já existe!"
+orient = "Orientador do projeto"
+escolha_area = "&Aacute;reas do conhecimento envolvidas no novo projeto:"
+escolha_area_desc = Escolha uma ou mais &aacute;reas que o projeto abrange"
+
+projeto_cadastrado = "O projeto foi cadastrado com sucesso!"
+
+frm_desTitulo = "T&iacute;tulo do projeto"
+frm_desTitulo_desc = "T&iacute;tulo para o seu projeto"
+
+frm_desProjeto = "Descri&ccedil;&atilde;o do Projeto"
+frm_desProjeto_desc = "Breve descri&ccedil;&atilde;o sobre o projeto"
+
+frm_codOrientador = "Nome do Orientador"
+frm_codOrientador_desc = "Escolha o orientador deste projeto"
+
+frm_codEscola = "Nome da escola"
+frm_codEscola_desc = "Escolha a escola do projeto"
+
+frm_flaEstado = "Estado do projeto"
+equipe = "Equipe do Projeto"
+equipes_proj = "Editar equipe" 
+equipe_alterada = "Os dados da equipe foram cadastrados com sucesso"	
+sem_orientador = "Esse projeto n&atilde;o possui orientador"
+nenhuma_escola = "Nenhuma escola listada"
+upload_proj = "Publicar p&aacute;gina do projeto"
+escolha_equipe = "Al&eacute;m de voc&ecirc;, outras pessoas podem fazer parte da equipe de seu projeto. Escolha quem voc&ecirc; gostaria de adicionar a sua equipe."
+voltar_projeto = "Voltar ao projeto"
+ferramentas = "Informa&ccedil;&otilde;es e propriedades do projeto"
+editar_proj = "Atualizar as informa&ccedil;&otilde;es deste projeto"
+proj_narea = "Nenhum projeto para esta &Aacute;rea"
+
+
+[paginas]
+frm_desComentario = "Coment&aacute;rio"
+link_pagina = "P&aacute;gina"
+link_diario = "Di&aacute;rio"
+link_info = "Informa&ccedil;&otilde;es"
+
+enviar_pagina = "Enviar essa p&aacute;gina para um amigo"
+
+paginas_escola = "Ver os usu&aacute;rios por escola"
+paginas_alfabetica = "Ver os usu&aacute;rios em ordem alfab&eacute;tica"
+nenhuma_escola = "Nenhuma escola cadastrada no ambiente"
+selecione_uma_escola = "Selecione uma escola"
+lista_usuarios_escola = "Listando os usu&aacute;rios da escola"
+nenhum_user_escola = "Nenhum usu&aacute;rio cadastrado nesta escola"
+selecione_uma_turma = "Selecione uma turma"
+nenhuma_turma = "Nenhuma turma cadastrada na escola"
+lista_usuarios_turma = "Listando os usu&aacute;rios da turma"
+todos_users_escola = "Listar todos os usu&aacute;rios desta escola"
+nenhum_user_turma = "Nenhum usu&aacute;rio cadastrado nesta turma"
+selecionar_outra_escola = "Selecionar outra escola"
+selecionar_outra_turma = "Selecionar outra turma"
+
+desabilitado_info_adicionais = "As informa&ccedil;&otilde;es adicionais como  p&aacute;ginas e di&aacute;rio foram desabilitadas, pois o n&uacute;mero de usu&aacute;rios listado &eacute; muito grande. Para saber mais sobre um usu&aacute;rio, por favor entre no link informa&ccedil;es."
+
+projetos = "Projetos"
+
+[cadastro]
+frm_nomPessoa = "Digite seu nome"
+frm_nomPessoa_desc = "Entre nesse campo com o seu nome completo."
+
+frm_nomUser = "Digite o seu apelido"
+frm_nomUser_desc = "Um apelido &eacute; um nome que ser&aacute; colocado no seu email. Ele deve ser formado por apenas uma palavra, sem espa&ccedil;os, cedilha, ou acentos. As letras tamb&eacute;m devem serem min&uacute;sculas."
+
+frm_desSenha = "Digite uma senha"
+frm_desSenha_desc = "Escolha uma senha que voc&ecirc; consiga lembrar."
+
+frm_desSenhaConfirma = "Digite novamente sua senha para confirmar"
+
+frm_codEscola = "Em que escola voc&ecirc; estuda?"
+frm_datNascimento = "Digite a sua data de nascimento"
+
+
+ja_cadastrado = "Algu&eacute;m j&aacute; escolheu esse apelido. Por favor escolha outro."
+ja_cadastrado_nome = "J&aacute; existe algu&eacute;m com o mesmo nome que o seu no ambiente. Se voc&ecirc; j&aacute; se cadastrou no ambiente e esqueceu sua senha, utilize a op&ccedil;&atilde;o 'Esqueci minha senha'."
+senhas_nao_conferem = "As suas senhas não são iguais. Por favor verifique."
+username_em_branco = "Voc&ecirc; deve digitar um apelido para poder se cadastrar."
+caracteres_estranhos = "O seu apelido n&atilde;o pode conter espacos, ou letras como o cedilha ou acentos." 
+
+cadastro_pessoal_efetuado = "Voc&ecirc; se cadastrou com sucesso!"
+ir_meu_webfolio = "Entrar no AMADIS"
+
+
+[email]
+men_recebidas = "Mensagens recebidas"
+men_enviadas = "Mensagens enviadas"
+enviar_men = "Enviar Mensagem"
+
+citando = "Citando "
+email_desabilitado = "O seu correio est&aacute; desabilitado!"
+
+email_desabilitado_desc = "Observei que o seu e-mail &eacute; {EMAIL}. Infelizmente n&atilde;o tenho como gerenciar um email que n&atilde;o seja criado dentro do pr&oacute;prio ambiente. Se voc&ecirc; quiser posso criar um novo e-mail para voc&ecirc;, &eacute; s&oacute; clicar no link abaixo. Se voc&ecirc; n&atilde;o mudar nada, continuarei enviando as mensagens para {EMAIL}."
+
+responder_email = "Reponder Mensagem"
+criar_novo_email = "Criar um novo e-mail"
+apagar_email = "Apagar mensagens"
+
+[chat]
+frm_nomSala = "Nome da Sala"
+frm_desSala = "Assunto da Sala"
+frm_flaPermanente = "Salvar o chat da sala"
+
+criar_sala = "Cria Sala de Chat"
+
+salas_encerradas = "Salas de Chat Encerradas"
+salas_abertas = "Salas de Chat Abertas"
+
+entra_sala = "entrou na sala."
+saiu_sala = "saiu da sala."
+
+fala = "fala para"
+todos = "Todos"
+
+[userinfo]
+admin = "Administrador"
+nome_user = "Nome de usu&aacute;rio"
+nascimento = "Data de nascimento"
+datcadastro = "Data em que se cadastrou no AMADIS"
+email = "E-Mail"
+escola = "Escola"
+ver_coment = "Ver/enviar coment&aacute;rios"
+
+projetos_participa = "Projetos que Participa"
+projeto_sem_titulo = "Projeto n&atilde;o possui t&iacute;tulo"
+
+foruns_participou = "F&oacute;runs que Participou"
+
+
+[addressbook]
+addressbook  = "Meus amigos"
+frm_nomContato = "Nome"
+frm_strEmail  = "Email"
+
+procura = "Procura"
+procura_amigo = "Procura por um amigo"
+usuarios = "Usu&aacute;rios"
+nomPessoa = "Nome"
+email = "Email"
+
+enviar_email = "Enviar email"
+selecionar_todos = "Seleciona Todos"
+apagar_contato = "Apagar amigo"
+
+[procura]
+titulo_janela = "Procurar usu&aacute;rios"
+todas_escolas = "Em todas as escola"
+username = "Nome de Usu&aacute;rio"
+turma = "Turma"
+escola = "Escola"
+
+usuarios = "Usu&aacute;rios"
+nomPessoa = "Nome completo"
+email = "Email"
+
+adicionar_contatos = "Adicionar aos Meus Contatos"
+enviar_email = "Enviar email"
+contato_adicionado = "Novos contatos adicionados com sucesso."
+usuario_ja_e_contato = "O usuario j&aacute; est&aacute; nos seus contatos"
+
+selecionar_todos = "Seleciona Todos"

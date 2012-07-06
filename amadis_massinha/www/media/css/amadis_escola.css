@@ -1,0 +1,82 @@
+.fontgray  {text-decoration: none;	color: #333333;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 16px;}
+.fontgray2  {text-decoration: none; color: #8D8D8D;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 16px;}
+.fontgray3  {text-decoration: none; color: #8D8D8D;	FONT-FAMILY: Arial;	FONT-SIZE: 20px;	line-height : 16px;}
+
+.fontorange  {text-decoration: none;	color: #F07400;	FONT-FAMILY: Arial;	FONT-SIZE: 13px;	line-height : 16px;}
+.fontred  {text-decoration: none;	color: #D33B17;	FONT-FAMILY: Arial;	FONT-SIZE: 13px;	line-height : 16px;}
+
+
+.fontdiario  {text-decoration: none;  color: #990033;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 16px;}
+.fonttoproj  {text-decoration: none;  color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 13px; font-weight: bold; line-height : 16px;}
+
+td.tdblue  { background-color: #DFDFFF; }
+td.tdgreen  { background-color: #B8EBAC; }
+
+
+
+.fontred  {text-decoration: none;	color: #D33B17;	FONT-FAMILY: Arial;	FONT-SIZE: 13px;	line-height : 16px;}
+
+
+.error {
+   text-decoration: none;
+   text-align: center;
+   color: #D33B17; 
+   FONT-FAMILY: Arial;
+   FONT-SIZE: 13px;
+   line-height : 16px; 
+}
+
+
+.fontdiario  {text-decoration: none;  color: #990033;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 16px;}
+.fonttoproj  {text-decoration: none;  color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 13px; font-weight: bold; line-height : 16px;}
+.fontchat  {text-decoration: none;  color: #ff696a; FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 16px;}
+
+td.tdblue  { background-color: #DFDFFF; }
+td.tdgreen  { background-color: #B8EBAC; }
+
+
+/* link menu lateral - fundo branco */
+a.mnlateral:link    {text-decoration: underline;	color: #666666;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 14px;}
+a.mnlateral:visited {text-decoration: underline;	color: #666666;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 14px;}
+a.mnlateral:active  {text-decoration: underline;	color: #333333;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 14px;}
+a.mnlateral:hover   {text-decoration: underline;	color: #F07400;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;	line-height : 14px;}
+
+.comum {
+ text-decoration: none; 
+ color: #555555;
+ FONT-FAMILY: Arial;
+ FONT-SIZE: 12px;
+ line-height: 18px; 
+}
+
+/* link comum - fundo branco */
+a.comum:link    {text-decoration: underline; color: #666666; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height: 18px; }
+a.comum:visited {text-decoration: underline;  color: #666666; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height: 18px; }
+a.comum:active  {text-decoration: underline;  color: #333333; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height: 18px; }
+a.comum:hover   {text-decoration: underline;  color: #F07400; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height: 18px; }
+
+/* link projetos - verde */
+a.projeto:link    {text-decoration: underline; 	color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;   line-height : 14px;}
+a.projeto:visited {text-decoration: underline;  color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.projeto:active  {text-decoration: underline; 	color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.projeto:hover   {text-decoration: underline; 	color: #F07400;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+
+/* link forum - azul escuro */
+a.cafe:link    {text-decoration: underline;	color: #666699;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.cafe:visited {text-decoration: underline;	color: #666699;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.cafe:active  {text-decoration: underline;	color: #666699;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.cafe:hover   {text-decoration: underline;	color: #F07400;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.projeto:link    {text-decoration: underline; 	color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;   line-height : 14px;}
+a.projeto:visited {text-decoration: underline;  color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.projeto:active  {text-decoration: underline; 	color: #339933;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+
+/* link paginas - marrom */
+a.paginas:link    {text-decoration: underline; 	color: #CC6633;	FONT-FAMILY: Arial;	FONT-SIZE: 11px;   line-height : 14px;}
+a.paginas:visited {text-decoration: underline;  color: #CC6633;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.paginas:active  {text-decoration: underline; 	color: #CC6633;	FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+a.paginas:hover   {text-decoration: underline; 	color: #F07400; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 14px;}
+
+
+BODY {
+  background-repeat: repeat-x;
+}

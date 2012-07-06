@@ -1,0 +1,28 @@
+CC= /opt/csw/bin/gcc
+PHP= /opt/csw/bin/php
+APACHE_GID=60001
+APACHE_UID=60001
+
+prefix= /Amadis/rddevelsun
+
+COMMON_FLAGS= -DPREFIX="\"$(prefix)\"" -DPHP="\"$(PHP)\"" -DAPACHE_UID=$(APACHE_UID) -DAPACHE_GID=$(APACHE_GID) 
+WRAPPER_FLAGS= -DHTTP_GID=$(APACHE_GID)
+
+OPT= -g -O2
+DEFS= -DHAVE_STRERROR=1 -DHAVE_SETREGID=1 -DHAVE_SYSLOG=1 -DSTDC_HEADERS=1 -DHAVE_SYSLOG_H=1 -DGETGROUPS_T=gid_t -DHAVE_VSNPRINTF=1 
+LIBS=		
+
+CFLAGS= -g -O2 $(OPT) $(DEFS) $(LIBS)
+
+
+all: common.o wrapper.o
+	rm -f ../wrapper
+	$(CC) -o ../wrapper  common.o wrapper.o; \
+	chmod u+s,g+s ../wrapper
+	chown root:root ../wrapper
+	
+wrapper.o: common.h common.c Makefile
+	$(CC) -c -I. $(CFLAGS) $(WRAPPER_FLAGS) wrapper.c
+	
+common.o: common.h common.c Makefile
+	$(CC) -c -I. $(CFLAGS) $(COMMON_FLAGS) common.c

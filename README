@@ -1,0 +1,10 @@
+AMADIS Massinha was a version of the AMADIS Virtual Learning Environment developed for young children (6-10 y.o.). It features an user interface designed for children using colorful clay models.
+
+This software was heavily used by children of  Porto Alegre Public School System, in Brazil, during the project ECSIC in 2003.
+
+It was developed using a rudimentary in-house relative-object wrapper (the Model of MVC) called rddevel. Both code are included in order to make possible to run the software.
+
+
+=Requirements=
+
+This software requires PHP 4.2 in order to run. It is know that it doesn't run in newer versions.

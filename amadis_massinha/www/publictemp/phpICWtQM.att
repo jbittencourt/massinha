@@ -1,0 +1,81 @@
+.fundo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	background-image: url(http://img.terra.com.br/chat/img/fundo.gif);
+	background-color: #FFFFFF;
+	scrollbar-3d-light-color: #000000;
+	scrollbar-arrow-color: #A40201;
+	scrollbar-base-color: #F9E7D5;
+	scrollbar-dark-shadow-color: #FF7D00;
+	scrollbar-face-color: #FF7D00;
+	scrollbar-highlight-color: #A40201;
+	scrollbar-shadow-color: #FF7D00;
+}
+
+.texto {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; text-decoration: none; color: #000000}
+.textobold { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; text-decoration: none ; color: #000000}
+.textolink { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; text-decoration: none ; color: #A40201}
+.textolinkbold { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; text-decoration: none ; color: #A40201}
+.textobranco { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; text-decoration: none; color: #FFFFFF}
+.textobrancobold { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; text-decoration: none; color: #FFFFFF }
+.titulo { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; text-decoration: none ; color: #000000 }
+.titulolink { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; text-decoration: none ; color: #A40201}
+.credito {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666; text-decoration: none}
+.legenda { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666 ; text-decoration: none}
+.t { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666 ; text-decoration: none}
+.brb { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666 ; text-decoration: none}
+.lista {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000; text-decoration: none}
+.data { font-family: Verdana, Arial, Helvetica, sans-serif; text-decoration: none; font-size: 10px; font-weight: normal; color: #666666}
+.chapeu { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; text-decoration: none; color: #FFFFFF }
+.local {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; color: #000000; text-decoration: none}
+
+.foot {COLOR: #000000; font-family:arial; font-weight: normal; text-decoration: none}
+.footN {COLOR: #ffffff; font-family:arial; font-weight: normal; text-decoration: none}
+.px {font-size: 1pt; font-weight: normal; text-decoration: none}
+.ptc {COLOR: #000000; font-family:arial; font-size:10px; font-weight: normal; text-decoration: none}
+.ptc1 {COLOR: #000000; font-family:arial; font-size:10px; font-weight: normal; text-decoration: none; width: 25;}
+.ptcn {COLOR: #ffffff; font-family:arial; font-size:10px; font-weight: normal; text-decoration: none}
+.menu {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+; background-image: url(http://img.terra.com.br/chat/img/bgtd.gif)
+; background-color: #FF7D00
+}
+.menu2 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; color: #A40201; text-decoration: none ; background-color: #F2D9C1; background-image: url(http://img.terra.com.br/chat/img/bgtd.gif)}
+.menu3 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; color: #FFFFFF; text-decoration: none ; background-image: url(http://img.terra.com.br/chat/img/bgtd3b.gif)}
+.submenu {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #A40201;
+	text-decoration: none;
+}
+
+.path {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #A40201; text-decoration: none}
+.path2 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #A40201; text-decoration: none ; font-weight: normal}
+.path3 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #A40201; text-decoration: none ; font-weight: bold}
+
+a:hover {  text-decoration: underline}
+a.submenu:hover {  font-weight: normal}
+a.footN:hover {COLOR: #ffffff; font-family:arial; font-weight: normal; text-decoration: underline}
+a.lista:hover {text-decoration: underline}
+a.foot:hover {COLOR: #000000; font-family:arial; font-weight: normal; text-decoration: underline}
+.titular {
+font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; text-decoration: none ; color: #A40201
+}
+.menulink { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; color: #FFFFFF; text-decoration: none; }
+.menu22linhas {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #A40201;
+	text-decoration: none ;
+	background-color: #F2D9C1;
+	background-image: url(http://img.terra.com.br/chat/img/bgtd2linhas.gif;
+}

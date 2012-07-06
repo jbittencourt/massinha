@@ -1,0 +1,94 @@
+[Ambiente]
+plataforma_cod = YOUR_DB_PLATAFORM_COD
+plataforma_id = "AMADIS_ESCOLA"
+plataforma_master = 0
+
+use_md5_password = 1
+store_plain_password = 1
+
+session_name = "AMADIS_ESCOLA"
+session_timeout = 1500
+auto_accept_subscribe = 0
+
+classify_users_by_class = 1
+group_by_escola = 0
+
+manutencao = 0
+
+[Internet]
+host = "YOU_MUST_COMPLETE"
+url = "http://YOU_MUST_COMPLETE/amadis_escola"
+urlferramentas = "http://YOU_MUST_COMPLETE/amadis_escola/ferramentas"
+urlimagens = "http://YOU_MUST_COMPLETE/amadis_escola/media/imagens"
+urlpaginas = "http://YOU_MUST_COMPLETE/amadis_escola_paginas"
+urljs = "http://YOU_MUST_COMPLETE/amadis_escola/media/js"
+urlcss = "http://YOU_MUST_COMPLETE/amadis_escola/media/css"
+urlmedia = "http://YOU_MUST_COMPLETE/amadis_escola/media"
+urltemp = "http://YOU_MUST_COMPLETE/amadis_escola/publictemp"
+
+[Banco_Dados]
+db_host = localhost
+db_user = amadis
+db_senha = SECRET
+db_nome = amadis
+db_sgbd = mysql
+
+#MUST BE COMPLETED
+[Diretorios]
+rootpath = /usr/local/amadis_escola
+pathpaginas = /usr/local/amadis_escola/paginas
+pathuserlib = /usr/local/amadis_escola/userlib
+pathtemplates = /usr/local/amadis_escola/templates
+pathferramentas = /usr/local/amadis_escola/ambiente/ferramentas
+pathtemp = /usr/local/amadis_escola/ambiente/publictemp
+pathlog = /usr/local/amadis_escola/log
+pathlang = /usr/local/amadis_escola/lang
+
+
+[Arquivos]
+log = "amadis.log"
+default_uid = 504
+default_gid = 500
+default_per = 0755
+
+[Linguagem]
+ativa = 1
+default = pt-br
+pt-br = Portugues Brasil
+en = English
+
+[Finder]
+timeout = 300
+window_refresh_timeout = 30
+sound_new_chat = open_chat.swf
+activate_emotions = 1
+
+image_sad = "emotions/sad.png"
+image_wink = "emotion/wink.png"
+image_oh = "emotions/scream.png"
+image_smile = "emotions/smile8.png"
+image_serio = "emotions/straight.png"
+image_tongue = "emotions/tongue.png"
+image_busy = "emotions/ocupado.png"
+
+
+[Chat]
+room_timeout = 1800
+
+#-------------------------------------------#
+# Configureções referentes ao $rd->devel    #
+#-------------------------------------------#
+[RDDevel]
+rdpath = /usr/local/rddevel
+
+[SmartForm]
+calendar_image = calendar.png
+calendar_left = prev.gif
+calendar_right = next.gif
+
+[email]
+imap_email = 1
+imap_str = "{localhost:143}INBOX"
+#The path where your virtual users mailbox will be stored
+mailbox_dir = "MAILBOX_PATH"
+domain = "ENTER_YOUR_DOMAIN"

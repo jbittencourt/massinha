@@ -1,0 +1,27 @@
+<?
+include("../../config.inc.php");
+include_once("$pathuserlib/amchatsala.inc.php");
+
+
+$pag = new RDPagina();
+
+$pag->add("<form action=\"juliano.php\" method=post>");
+$pag->add("<br>Codigo da Sala <input type=text name=frm_codsala>");
+$pag->add("</form>");
+
+
+if(!empty($_REQUEST[frm_codsala])) {
+
+
+  $chaves = opMVal("chat_mensagens","codRemetente","user","codUser");
+  $chaves = opVal("codSalaChat",$_REQUEST[frm_codsala],"chat_mensagens");
+
+  $param = new RDParam();
+  $param->setCamposProjecao(array("codMensagem", "nomUser", "chat_mensagens.tempo", "desMensagem"));
+r by chat_mensagens.tempo";
+
+  $list = new RDList(
+
+}
+
+?>

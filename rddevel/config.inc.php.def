@@ -1,0 +1,60 @@
+<?
+
+//preencha com a url certa para o ambiente
+$temppath = "[PREENCHER]";
+$file = "$temppath/config.ini";
+$fileferramentas = "$temppath/ferramentas.ini";    
+  
+$config_ini = parse_ini_file($file,TRUE);
+$path = $config_ini[Diretorios][path];
+$pathlib = $config_ini[Diretorios][pathlib];
+$pathilib = $config_ini[Diretorios][pathlib]."widgets/";
+$pathlibuser = $config_ini[Diretorios][pathlibuser];
+$pathuserlib = $pathlibuser;
+$pathbin = $config_ini[Diretorios][pathbin];
+  
+//$ferramentas = parse_ini_file($fileferramentas,TRUE);
+
+include_once($pathlib."lib.inc.php");
+  
+if (!empty($r_bibliotecas)) {  //var global de bibliotecas a serem incluidas
+  foreach ($r_bibliotecas as $k=>$bib) 
+    $bib = addSlashes($bib);        
+  $lib = eval("\$bib = \"$bib\"; return $bib;");
+
+  include_once($lib);    
+}        
+
+//conecta com o bco de dados
+conectaDB();
+
+session_start();                              //criar variaveis de sessao
+if (!empty($_REQUEST[frm_login])) {             //fazer todo processo de login
+  $_SESSION[ambiente] = new RDAmbiente($_REQUEST[frm_login],$_REQUEST[frm_pwd],$config_ini[Internet][url]);        
+}
+else {
+  if (isset($_SESSION[ambiente]))             //somente autenticar
+    $_SESSION[ambiente]->autentica();
+  else {
+    if( ($sem_login!=1) || empty($sem_login)) {
+      Header("Location: ../denied.php");
+    }
+    else {
+      $_SESSION[ambiente] = new RDAmbiente();
+    }
+  }
+}
+
+//carrega arquivo de linguagens
+//se lang = 1 -> portugues brasil
+//...
+if(!$config_ini[Linguagem][disable_multilang]) {
+  switch($_SESSION[usuario]->lang) {
+  case 1:
+    $lang = @parse_ini_file($config_ini[Diretorios][pathlang]."pt_br.lang",TRUE);
+    break;
+
+  };
+};
+
+?>

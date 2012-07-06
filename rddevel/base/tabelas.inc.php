@@ -1,0 +1,593 @@
+<?php
+/*
+*  This program is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  This program is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU Library General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with this program; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*
+* Programa: Rooda - Rede Cooperativa de Apendizagem
+* Vers�o de Surgimento: 0.6
+* Programador: Juliano <juliano@edu.ufrgs.br>
+* Nome: Programas Geral de Leitura de Tabelas
+* Descri��o: Esse arquivo tem por objetivo possibilitar a leitura generica de
+*            tabelas sem precias escrever um script novo para cada leitura
+*/
+
+include_once("DB.php");
+
+//constante que define o join padrao
+define("RD_TABELAS_DEFAULT_JOIN","INNER JOIN");
+
+function opVal($campo,$valor,$tabela="",$operador="=",$quotes=1) {
+    $chave = array();
+    $chave[campo] = $campo;
+    $chave[valor] = $valor;
+    $chave[tabela] = $tabela;
+    $chave[op] = $operador;
+    $chave[quotes] = $quotes;  //se o valor de comparacao eh ou nao colocado entres aspas
+    $chave[prevOp] = "AND";
+    return $chave;
+}
+
+function orVal($campo,$valor,$tabela="",$operador="=",$quotes=1) {
+    $chave = array();
+    $chave[campo] = $campo;
+    $chave[valor] = $valor;
+    $chave[tabela] = $tabela;
+    $chave[op] = $operador;
+    $chave[quotes] = $quotes;  //se o valor de comparacao eh ou nao colocado entres aspas
+    $chave[prevOp] = "OR";
+    return $chave;
+}
+
+function opMVal($tabela1,$campo1,$tabela2,$campo2="",$makeJoin=1) {
+    $chave = array();
+    $chave[tabela1] = $tabela1;
+    $chave[tabela2] = $tabela2;
+    $chave[campo1]  = $campo1;
+    $chave[makeJoin] = $makeJoin;
+    if (empty($campo2)) $chave[campo2] = $campo1;
+    else				$chave[campo2] = $campo2;
+    return $chave;
+}
+
+//tira o nome da tabela dos nomes dos campos
+//isto eh usado porque os campos que sao passados para o listaRegTabela ou leRegTabela tem os nomes qualificados
+//como nomeTabela.nomeCampo, mas no retorno do fetch do bd volta um array apenas como nomeCampo. 
+//alem de retirar o nome da tabela se o nome do campos estiver no formato nomeDoCampo renomeacao entao coloca a renomeacao
+//no array de campos, nao o proprio nome do campo
+function retiraNomesTabela($campos) {
+    $camposSemNomeTabela = array();
+    foreach ($campos as $campo) {
+        list($nomeCampo,$renomeacao) = explode(" ",$campo);
+        if (empty($renomeacao)) {
+            $pos = strpos($nomeCampo,".");
+            if ($pos===FALSE)
+            $camposSemNomeTabela[] = $nomeCampo;
+            else
+            $camposSemNomeTabela[] = substr($nomeCampo,$pos+1);
+        }
+        else {
+            $camposSemNomeTabela[] = $renomeacao;
+        }
+    }
+    return $camposSemNomeTabela;
+}
+
+function associa($result,$campos) {
+    if(!is_array($campos)){
+        return 0;
+    };
+
+    while($row = $result->fetchRow(DB_FETCHMODE_ASSOC)) {
+        foreach($campos as $campo) {
+            $item[$campo]= $row[$campo];
+        };
+
+        $lista[] = $item;
+    };
+    return $lista;
+}
+
+
+//associa o resultado de uma consulta num array
+//campos pode ter os nomes das colunas com alias
+function associaComAlias($result,$campos) {
+    $nomesCampos = array();
+    $lista = array();
+    foreach ($campos as $tabela=>$camposTabela) {
+        foreach ($camposTabela as $campo) {
+            list($nomeCampo,$renomeacao) = explode(" ",$campo);
+            if (empty($renomeacao))
+            $nomesCampos[] = $renomeacao;
+            else
+            $nomesCampos[] = $nomeCampo;
+        }
+    }
+    
+    while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)) {
+        $item = array();
+        foreach ($nomesCampos as $campo) {
+            $item[$campo] = $row[$campo];
+        }
+        $lista[] = $item;
+    }
+}
+
+
+function conectaDB($sgbd="",$user="",$senha="",$host="",$nome="") {
+    global $config_ini, $R_db;
+
+    $conf = $config_ini[Banco_Dados];
+
+    if (empty($sgbd))
+    $dsn ="$conf[db_sgbd]://$conf[db_user]:$conf[db_senha]@$conf[db_host]/$conf[db_nome]";
+    else
+    $dsn ="$sgbd://$user:$senha@$host/$nome";
+    $R_db = DB::connect($dsn);
+
+    if(strtolower(get_class($R_db))=="db_error") {
+
+        if($config_ini[rddevel][debug]) note($R_db->message);
+        return 0;
+    }
+    
+    return 1;
+}
+
+/** Normaliza as chaves
+ *
+ */
+function parseKeys($chaves) {
+    $ch = array();
+    if (is_array($chaves)) {
+        foreach ($chaves as $chave) {
+            if(!empty($chave[campo])) {
+	//chave eh do tipo simples
+                $ch[chavesWhere][] = $chave;
+            }
+            else {
+	//chave eh do tipo join
+                $ch[chavesJoin][$chave[tabela1]][$chave[tabela2]][] = $chave;
+            }
+            
+        }
+    } else {
+        $ch[chavesWhere] = $chaves;
+    }
+    
+    return $ch;
+}
+
+/** Gera o sql das chaves
+ *
+ */
+function geraSqlChaves($chaves) {
+
+    $chaves = parseKeys($chaves);
+
+    if (!empty($chaves[chavesWhere])) {
+        foreach ($chaves[chavesWhere] as $c) {
+            if (!empty($str_where)) $str_where.= " ".$c[prevOp]. " ";
+      //if (!empty($str_where)) $str_where.= " AND ";
+            if (!empty($c[tabela])) {
+                $str_where.= " $c[tabela].";
+            }
+            if (strtolower($c[op]) == "is null") {
+                $str_where.= $c[campo]." IS NULL ";
+            }
+            else {
+                if ($c[quotes])
+                $str_where.= "$c[campo] $c[op] '$c[valor]'";  //coloca aspas
+                else
+                $str_where.= "$c[campo] $c[op] $c[valor]";    //nao coloca aspas
+            }
+        }
+    }
+    
+    return $str_where;
+}
+
+//constroi um select
+function buildSelect($tabelas,$campos,$param) {
+    $tabelas = array_reverse($tabelas);
+  //para manter a compatibilidade com programas anteriores, $campos tem duas semanticas levemente diferentes
+  //se for apenas um array normal, ou seja, nao tiver nehuma chave alfanumerica, entao eh simplesmente um array
+  //com os nomes dos campos
+  //senao eh um array associativo onde a chave eh o nome da tabela, e nesta entrada esta um array dos nomes dos campos desta tabela
+  //o nome do campo pode estar no formato de renomeacao do sql
+  //tipo : $campos[tabela1] = array("campo1 c","campo2") -> isto indica que campo1 eh um campo de tabela1 e esta sendo renomeaco para "c" 
+  //o campo2 tambem pertence a tabela1 e nao tem nenhuma renomeacao 
+
+    if ($param->isDefined("tipoJoin"))
+    $tipoJoin = $param->getTipoJoin();
+    else
+    $tipoJoin = RD_TABELAS_DEFAULT_JOIN;
+
+    if (!empty($campos[$tabelas[0]]))
+    $camposFormatoNovo = 1;
+    else
+    $camposFormatoNovo = 0;
+
+    $pesq = "SELECT ";
+
+    if ($param->isDefined("distinct"))
+    $pesq.= "DISTINCT ";
+
+    if (is_array($tabelas)) {
+        $firstTable = array_pop($tabelas);
+
+    //campos esta no formato atual
+        if ($camposFormatoNovo) {
+      //apenas adiciona na projecao os nomes dos campos que estao em $campos
+            foreach ($tabelas as $tabela) {
+                foreach ($campos[$tabela] as $campo) {
+                    $pesq.= " $tabela.$campo,";
+                }
+            }
+        }
+    //campos esta no formato antigo
+        else {
+            foreach ($campos as $campo) {
+                $pesq.= " $campo,";
+            }
+        }
+        
+        $pesq = substr($pesq,0,-1); 	//retira a ultima virgula
+        
+        $pesq.= " FROM ";
+    //$firstTable = array_pop($tabelas);
+        $pesq.= " $firstTable";
+    }
+    else {
+        $pesq.= " * FROM $tabelas ";
+    }
+
+    $chave = $param->getChaves();
+
+    $chaves = parseKeys($chave);
+
+
+    if((!empty($campos))) {
+        if(!empty($chaves)) {
+            if(!empty($chaves[chavesWhere]) || !empty($chaves[chavesJoin]) || $param->isDefined("sqlWhere")) {
+                reset($chaves);
+                $str="";
+                $str_where="";
+                if (!empty($chaves[chavesWhere])) {
+                    foreach ($chaves[chavesWhere] as $c) {
+                        if (!empty($str_where)) $str_where.= " ".$c[prevOp]. " ";
+	    //if (!empty($str_where)) $str_where.= " AND ";
+                        if (!empty($c[tabela]))
+                        $str_where.= " $c[tabela].";
+                        if (strtolower($c[op]) == "is null")
+                        $str_where.= $c[campo]." IS NULL ";
+                        else {
+                            if ($c[quotes])
+                            $str_where.= "$c[campo] $c[op] '$c[valor]'";  //coloca aspas
+                            else
+                            $str_where.= "$c[campo] $c[op] $c[valor]";    //nao coloca aspas
+                        }
+                    }
+                }
+                
+                if (!empty($chaves[chavesJoin])) {
+                    foreach($chaves[chavesJoin] as $tab1=>$chavesJoin) {
+                        foreach ($chavesJoin as $tab2=>$cJoin) {
+                             
+	      //if ($chavesJoin[makeJoin]) {
+                            if (is_string($cJoin[0][makeJoin]))
+                            $str.= " ".$cJoin[0][makeJoin]." ";
+                            else
+                            $str.= " $tipoJoin ";
+
+                            $str.=  $tab2." ON (";
+                            $s = "";
+                            foreach ($cJoin as $c) {
+                                if (!empty($s)) $s.= " AND ";
+                                $s.= "$c[tabela1].$c[campo1]=$c[tabela2].$c[campo2]";
+                            }
+                            $str.= $s.") ";
+                            /*}
+                            else {
+                            if (!empty($str_where)) $str_where.= " AND ";
+                            $str_where.= " $c[tabela1].$c[campo1]=$c[tabela2].$c[campo2] ";
+                        }*/
+                        }
+                    }
+                }
+                
+                
+                $pesq .= " $str";
+                if (!empty($str_where))
+                $pesq.= "WHERE $str_where";
+
+	//acrescenta sql setada na mao
+                if ($param->isDefined("sqlWhere")) {
+                    if (empty($str_where)) $pesq.= " WHERE ";
+                    $pesq .= $param->getSqlWhere();
+                }
+
+            }
+            else {
+                $pesq .= " WHERE ";
+                $n = count($chave);
+                for($i=0;$i<$n;$i++) {
+                    $pesq .= $campo[$i];
+                    if(($i+1)<$n) $pesq.= " AND ";
+                }
+                
+	//acrescenta sql setada na mao
+                if ($param->isDefined("sqlWhere"))
+                $pesq .= $param->getSqlWhere();
+            }
+        }
+        else {
+      //acrescenta sql setada na mao
+            if ($param->isDefined("sqlWhere")) {
+                if (empty($str_where)) $pesq.= " WHERE ";
+                $pesq .= $param->getSqlWhere();
+            }
+        }
+
+        if ($param->isDefined("ordem"))
+        $pesq.= " ORDER BY ".$param->getOrdem();
+    }
+
+    return $pesq;
+}
+
+function leRegTabela($tabelas,$campos,$chave="",$valor="",$tipoJoin="") {
+    global $R_db,$TAB_lastquery;
+
+
+  //faz a selecao dos campos da tabela mais hierarquica para menos hierarquica
+  //porque se nao existir o registro relacionando uma tabela mais hierarquica
+  //com uma menos hieraraquica os valores da tabela menos hierarquica
+  //continuarao prevalecendo, senao seriam NULL
+
+  //define o tipo de join
+    if (empty($tipoJoin)) {
+        $tipoJoin = RD_TABELAS_DEFAULT_JOIN;
+    }
+
+    $pesq = "SELECT ";
+    if (is_array($tabelas)) {
+        $tabelas = array_reverse($tabelas);
+        foreach ($tabelas as $tabela) {
+            $pesq.= " $tabela.*,";
+        }
+        $pesq = substr($pesq,0,-1); 	//retira a ultima virgula
+
+        $pesq.= " FROM ";
+        $firstTable = array_pop($tabelas);
+        $pesq.= " $firstTable";
+    }
+    else {
+        $pesq.= " * FROM $tabelas ";
+    }
+    
+    if(!empty($campos))
+    { if(is_array($chave))
+    {  reset($chave);
+    $str="";	   //pesquisa dos joins
+    $str_where="";	  //pesquisa normal
+    foreach ($chave as $c) {
+         
+        if (array_key_exists("campo",$c)) {    //chave eh do tipo simples
+            if (!empty($str_where)) $str_where.= " AND ";
+            if (!empty($c[tabela]))
+            $str_where.= " $c[tabela].";
+            if ($c[quotes])
+            $str_where.= "$c[campo] $c[op] '$c[valor]'";  //coloca aspas
+            else
+            $str_where.= "$c[campo] $c[op] $c[valor]";    //nao coloca aspas
+        }
+        else {								 //chave eh do tipo multiplo
+            $str.= " $tipoJoin $c[tabela2] ON $c[tabela1].$c[campo1]=$c[tabela2].$c[campo2]  ";
+        }
+    }
+     
+    $pesq .= " $str";
+    if (!empty($str_where))
+    $pesq.= " WHERE $str_where";
+    }
+    else {
+        $pesq .=  " WHERE $chave='$valor'";
+    }
+    }
+    
+    $TAB_lastquery[] = $pesq;
+    $result = $R_db->query($pesq);
+    if(!DB::isError($result)) {
+        
+        $linhas = $result->numRows();
+        if($linhas==1) {
+            $ret = associa($result,$campos);
+      //note($ret);
+            $result->free(); //libera a memoria do resultSet
+            return $ret[0];
+        }
+        else return 0;
+    }
+    else {
+        
+        return 0;
+    }
+
+}
+
+function insereRegTabela($tabela,$campos)
+{  global $R_db,$TAB_lastquery;
+if(!is_array($campos)) { return 0; };
+
+$pesq = "INSERT INTO $tabela ";
+
+unset($str);
+unset($valor);
+while(list($c,$v)= each($campos))
+{ $str.= ",$c";
+$valor.= ",'$v'"; };
+
+if(empty($str)) return 0;
+
+   //retira a virgula do primeiro item ",campo='valor'" para "campo='valor";
+$str = substr ($str, 1);
+$valor = substr ($valor, 1);
+
+$pesq .= " (".$str.") VALUES (".$valor.")";
+
+$TAB_lastquery[] = $pesq;
+$result = $R_db->query($pesq);
+
+if ($result==0) $tempo = 0;
+return $tempo;
+};
+
+//lista registro tabela, com JOIN
+function listaRegTabela($tabelas,$param) {
+    global $R_db, $TAB_lastquery;
+    $campos = $param->getCamposProjecao();
+    $pesq = buildSelect($tabelas,$campos,$param);
+    $TAB_lastquery[] = $pesq;
+
+    if ($param->isDefined("startRow") && $param->isDefined("numOfRows"))
+    $result = $R_db->limitQuery($pesq,$param->getStartRow(),$param->getNumOfRows()); //eh uma limit query
+    else
+    $result = $R_db->query($pesq); //query normal
+
+    if(!DB::isError($result)) {
+        $linhas = $result->numRows();
+        if($linhas>0) {
+            $camposSemNomeTabela = retiraNomesTabela($campos);
+            if ($camposFormatoNovo)
+            $ret = associaComAlias($result,$camposSemNomeTabela);
+            else
+            $ret = associa($result,$camposSemNomeTabela);
+            $result->free(); //libera a memoria do resultSet
+            return $ret;
+        }
+        else return 0;
+    }
+    else return 0;
+
+}
+
+
+function getNomeTabela($tabela,$renomeacao) {
+    $renomeado = array_search($tabela,$renomeacao);
+    if ($renomeado==NULL)
+    return $nomeTabela;
+    else
+    return $renomeado;
+}
+
+function atualizaRegTabela($tabela,$chaves,$condicao,$quotes=1) {
+    global $R_db,$TAB_lastquery;
+
+    $pesq = "UPDATE $tabela";
+    if(is_array($chaves))
+    {  reset($chaves);
+    while(list($c,$v)=each($chaves))
+    {  if(!empty($str)) $str .=",";
+    if ($quotes)
+    $str .= "$c='$v'";
+    else
+    $str .= "$c=$v";
+    };
+    $pesq .= " SET $str";
+    };
+
+    if(is_array($condicao))
+    {  reset($condicao);
+    $str="";
+    while(list($c,$v)=each($condicao))
+    {
+        if(!empty($str)) $str .=" AND ";
+        $str .= $c;
+        if (empty($v[op]))
+        $str .= " = ".$v;
+        else
+        $str .= " ".$v[op] ." \"".$v[valor]."\"";
+    };
+    $pesq .= " WHERE $str";
+    };
+
+    $TAB_lastquery[] = $pesq;
+    $result = $R_db->query($pesq);
+
+
+    if(!DB::isError($result))
+    { return 1;
+    }
+    else return 0;
+}
+
+function pesqRegTabela($tabela,$chaves) {
+    global $R_db,$TAB_lastquery;
+
+    $pesq = "SELECT * FROM  $tabela";
+  
+    if(is_array($chaves))
+    {  reset($chaves);
+    while(list($c,$v)=each($chaves))
+    {  if(!empty($str)) $str .=" AND ";
+    $str .= "$c LIKE '$v[comeca]$v[valor]$v[termina]'";
+    };
+    $pesq .= " WHERE $str";
+    };
+
+    if(!empty($ordem))
+    {  $pesq .=  " ORDER BY $ordem"; };
+
+    $result = $R_db->query($pesq);
+    $TAB_lastquery[] = $pesq;
+
+    if(!DB::isError($result))
+    { $linhas = $result->numRows();
+    if($linhas>0)
+    {  $ret = associa($result,$campos);
+    return $ret;
+    }
+    else return 0;
+    }
+    else return 0;
+}
+
+
+
+function delRegTabela($tabela,$chave) {
+    global $R_db,$TAB_lastquery;
+
+    $pesq = "DELETE FROM  $tabela";
+
+
+    if(is_array($chave)) {
+        $str="";
+        foreach($chave as $c=>$v) {
+            if(!empty($str)) $str .=" AND ";
+
+            if(!empty($v[campo]))  { $campo = $v[campo]; }
+            else { $campo = $c; };
+
+            $str .= "$campo $v[op] '$v[valor]'";
+        }
+        $pesq .= " WHERE $str";
+    }
+     
+    $result = $R_db->query($pesq);
+    $TAB_lastquery[] = $pesq;
+
+    return $R_db->affectedRows();
+}
+
+?>
